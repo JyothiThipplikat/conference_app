@@ -9,6 +9,8 @@ class Api::ConferencesController < ApplicationController
     @speaker = Speaker.new(
                           first_name: params[:first_name],
                            last_name: params[:last_name],
+                           age: params[:age],
+                           gender:params[:gender],
                            email: params[:email]
                           )
   @speaker.save
@@ -25,10 +27,12 @@ class Api::ConferencesController < ApplicationController
 
     @speaker.first_name = params[:first_name] || @speaker.first_name
     @speaker.last_name = params[:last_name] || @speaker.last_name
+    @speaker.age = params[:age] || @speaker.age
+    @speaker.gender = params[:gender] || @speaker.gender
     @speaker.email = params[:email] || @speaker.email
   
   @speaker.save
-  render " show.json.jbuilder"
+  render "show.json.jbuilder"
   end
 
 def destroy

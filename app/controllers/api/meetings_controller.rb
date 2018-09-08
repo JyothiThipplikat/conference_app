@@ -8,6 +8,8 @@ class Api::MeetingsController < ApplicationController
   def create
     @meeting = Meeting.new(title: params[:title],
                           agenda:params[:agenda],
+                          remote:params[:remote],
+                          location:params[:location],
                           time:params[:time]
                           )
     @meeting.save
@@ -24,6 +26,8 @@ class Api::MeetingsController < ApplicationController
 
     @meeting.title = params[:title] || @meeting.title
     @meeting.agenda = params[:agenda] || @meeting.agenda
+    @meeting.remote = params[:remote] || @meeting.remote
+    @meeting.location = params[:locaion] || @meeting.location
     @meeting.time = params[:time] || @meeting.time
 
     @meeting.save
