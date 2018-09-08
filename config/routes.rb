@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
  namespace :api do 
-  get "/speaker_url" => "conferences#speaker"
-  get "/meeting_url" => "meetings#meeting"
-  get "first_meeting_url" => "meetings#first_meeting"
-  get "second_meeting_url" => "meetings#second_meeting"
-  get "last_meeting_url" => "meetings#last_meeting"
+  get "/speaker_url" => "conferences#index"
+  post "/speaker_url" => "conferences#create"
+  get "/speaker_url/:id" => "conferences#show"
+  patch "/speaker_url/:id" => "conferences#update"
+  delete '/speaker_url/:id'=> "conferences#destroy"
 
-  #Rendered all, first,second, and last meetings
+  get "/meeting_url" => "meetings#index"
+  post "/meeting_url" => "meetings#create"
+  get "/meeting_url/:id" => "meetings#show"
+  patch "/meeting_url/:id" => "meetings#update"
+  delete "/meeting_url/:id" => "meetings#destroy"
  end
 end
