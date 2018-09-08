@@ -13,8 +13,11 @@ class Api::ConferencesController < ApplicationController
                            gender:params[:gender],
                            email: params[:email]
                           )
-  @speaker.save
-  render "show.json.jbuilder"
+    if @speaker.save
+      render "show.json.jbuilder"
+    else
+      render json: {errors: @speakers.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -31,8 +34,11 @@ class Api::ConferencesController < ApplicationController
     @speaker.gender = params[:gender] || @speaker.gender
     @speaker.email = params[:email] || @speaker.email
   
-  @speaker.save
-  render "show.json.jbuilder"
+    if @speaker.save
+     render "show.json.jbuilder"
+    else 
+      render json: {errors: @speakers.errors.full_messages}, status: :unprocessable_entity
+   end
   end
 
 def destroy

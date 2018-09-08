@@ -12,8 +12,11 @@ class Api::MeetingsController < ApplicationController
                           location:params[:location],
                           time:params[:time]
                           )
-    @meeting.save
-    render "show.json.jbuilder"
+    if @meeting.save
+      render "show.json.jbuilder"
+    else
+      render json: {errors: @meetings.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -30,8 +33,11 @@ class Api::MeetingsController < ApplicationController
     @meeting.location = params[:locaion] || @meeting.location
     @meeting.time = params[:time] || @meeting.time
 
-    @meeting.save
+   if @meeting.save
     render "show.json.jbuilder"
+  else
+    render json: {errors: @meetings.errors.full_messages}, status: :unprocessable_entity
+  end
   end
 
 
