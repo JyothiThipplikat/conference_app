@@ -2,6 +2,9 @@ class Api::ConferencesController < ApplicationController
 
   def index
     @speakers = Speaker.all
+
+    @speakers = Speaker.all.order(age: :asc)
+
     render 'index.json.jbuilder'
   end
 
@@ -13,11 +16,11 @@ class Api::ConferencesController < ApplicationController
                            gender:params[:gender],
                            email: params[:email]
                           )
-    if @speaker.save
+     if @speaker.save
       render "show.json.jbuilder"
-    else
+     else
       render json: {errors: @speakers.errors.full_messages}, status: :unprocessable_entity
-    end
+     end
   end
 
   def show
@@ -36,9 +39,9 @@ class Api::ConferencesController < ApplicationController
   
     if @speaker.save
      render "show.json.jbuilder"
-    else 
+     else 
       render json: {errors: @speakers.errors.full_messages}, status: :unprocessable_entity
-   end
+    end
   end
 
 def destroy

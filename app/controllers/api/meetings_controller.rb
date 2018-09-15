@@ -2,6 +2,11 @@ class Api::MeetingsController < ApplicationController
   
   def index
     @meetings = Meeting.all
+
+   
+    @meetings = @meetings.where('remote = ?', 'true')
+ 
+
     render "index.json.jbuilder"
   end
 
@@ -10,7 +15,8 @@ class Api::MeetingsController < ApplicationController
                           agenda:params[:agenda],
                           remote:params[:remote],
                           location:params[:location],
-                          time:params[:time]
+                          time:params[:time],
+                          speaker_id:params[:speaker_id]
                           )
     if @meeting.save
       render "show.json.jbuilder"
@@ -32,6 +38,7 @@ class Api::MeetingsController < ApplicationController
     @meeting.remote = params[:remote] || @meeting.remote
     @meeting.location = params[:locaion] || @meeting.location
     @meeting.time = params[:time] || @meeting.time
+    @meeting.speaker_id = params[:speaker_id] || @meeting.speaker_id
 
    if @meeting.save
     render "show.json.jbuilder"
