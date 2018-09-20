@@ -1,5 +1,5 @@
 class Api::ConferencesController < ApplicationController
-
+  before_action :authenticate_admin, except: [:index, :show]
   def index
     @speakers = Speaker.all
 
